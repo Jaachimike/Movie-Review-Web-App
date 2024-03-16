@@ -58,6 +58,16 @@ app.post('/post-review', (req, res) => {
     })
 })
 
+app.get('/movie-reviews', async (req, res) => {
+    try {
+        const reviews = await Review.findAll()
+        res.json(reviews)
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ error: 'Internal server error' })
+    }
+})
+
 
 db.sequelize.sync().then((req) => {
     app.listen(2002, () => {
