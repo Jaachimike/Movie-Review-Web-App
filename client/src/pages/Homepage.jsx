@@ -68,13 +68,11 @@ const Homepage = () => {
       try {
         const res = await Axios.get("http://localhost:2002/movie-reviews");
         setMovieReviews(res.data);
-        console.log(movieReviews);
       } catch (err) {
         console.error("Error fetching data:", err);
       }
     };
     fetchReviews();
-    // console.log(movieReviews);
   }, []);
 
   return (
@@ -101,9 +99,13 @@ const Homepage = () => {
               </p>
               {/* trailer button  */}
               <div>
-                {" "}
                 <button className="bg-[#BE123C] px-6 py-3 rounded-sm text-xl font-medium">
-                  Watch Trailer
+                  <a
+                    target="_blank"
+                    href="https://youtu.be/M7XM597XO94?si=rRzFlVr6GmuVRNPa"
+                  >
+                    Watch Trailer
+                  </a>
                 </button>
               </div>
             </div>
@@ -111,28 +113,31 @@ const Homepage = () => {
         </div>
 
         {/* rest of page */}
-        <div className=" pl-44">
+        <div className=" max-w-7xl mx-auto">
           <h3 className="text-3xl font-semibold mb-10">Movie Reviews</h3>
-          <div>
+          <div className=" flex flex-col">
             {/* reviews */}
             {movieReviews.map((review, index) => (
-              <div key={index} className="grid grid-cols-4">
+              <div
+                key={index}
+                className="mb-8 shadow-lg pl-8 rounded-xl py-5 bg-gray-200 "
+              >
                 {/* profile */}
-                <div className="flex gap-4 mb-16 ">
-                  <img
-                    src={review.profilePicture}
-                    alt=""
-                    className="h-28 rounded-full"
-                  />
 
-                  <div className="flex flex-col justify-center">
-                    <h5 className="text-xl font-semibold">{review.name}</h5>
-                    <p>{review.location}</p>
-                  </div>
-                </div>
                 {/* review */}
                 <div className=" col-span-3">
-                  <h5 className="text-2xl font-bold mb-3">{review.title}</h5>
+                  <h5 className="text-3xl font-bold mb-2">{review.title}</h5>
+                  <div className="flex gap-4 mb-6 ">
+                    <img
+                      src="https://api.dicebear.com/7.x/lorelei/svg"
+                      alt=""
+                      className="h-8 rounded-full"
+                    />
+
+                    <div className="flex flex-col justify-center">
+                      <h5 className="text-md font-semibold">{review.name}</h5>
+                    </div>
+                  </div>
                   <p className="w-2/3 text-lg font-medium text-gray-500">
                     {review.review}
                   </p>
@@ -140,7 +145,6 @@ const Homepage = () => {
               </div>
             ))}
           </div>
-          ;
         </div>
       </div>
     </>

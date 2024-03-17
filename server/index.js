@@ -68,6 +68,18 @@ app.get('/movie-reviews', async (req, res) => {
     }
 })
 
+app.get('/personal-reviews', async (req, res) => {
+    const { username } = req.body
+    try {
+        const personal_review = Review.findAll({ where: { name: username } })
+        res.json(personal_review)
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({ error: 'Internal server error' })
+
+    }
+})
+
 
 db.sequelize.sync().then((req) => {
     app.listen(2002, () => {

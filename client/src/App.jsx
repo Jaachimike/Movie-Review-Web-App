@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import WriteReview from "./pages/WriteReview";
 import UserContext from "./contexts/UserContext";
+import PersonalReviews from "./pages/PersonalReviews";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/write" element={<WriteReview />} />
+          <Route path="/my-reviews" element={<PersonalReviews />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -5,6 +5,7 @@ import UserContext from "../contexts/UserContext";
 
 const Navbar = () => {
   const { displayUser } = useContext(UserContext);
+
   return (
     <div className=" bg-gray-900 text-white py-6">
       <div className="flex items-center justify-around">
@@ -33,7 +34,10 @@ const Navbar = () => {
                     <Link to="/write">Write Review</Link>
                   </li>
                   <li>
-                    <Link to="">Logout</Link>
+                    <Link to="/my-reviews">My Reviews</Link>
+                  </li>
+                  <li>
+                    <Link to="/">Logout</Link>
                   </li>
                 </>
               )}
