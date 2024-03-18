@@ -11,7 +11,7 @@ const WriteReview = () => {
 
   const submitReview = (e) => {
     e.preventDefault();
-    console.log(title, review, displayUser);
+    // console.log(title, review, displayUser);
     Axios.post("http://localhost:2002/post-review", {
       title: title,
       review: review,

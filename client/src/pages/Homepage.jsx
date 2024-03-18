@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import heroImage from "../assets/images/Poster.png";
 import Axios from "axios";
+import UserContext from "../contexts/UserContext";
 
 // const movieReviews = [
 //   {
@@ -63,6 +64,8 @@ import Axios from "axios";
 
 const Homepage = () => {
   const [movieReviews, setMovieReviews] = useState([]);
+  const { displayUser } = useContext(UserContext);
+
   useEffect(() => {
     const fetchReviews = async () => {
       try {

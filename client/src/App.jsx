@@ -9,6 +9,8 @@ import Login from "./pages/Login";
 import WriteReview from "./pages/WriteReview";
 import UserContext from "./contexts/UserContext";
 import PersonalReviews from "./pages/PersonalReviews";
+import DeleteUser from "./pages/DeleteUser";
+import EditReview from "./pages/EditReview";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/write" element={<WriteReview />} />
           <Route path="/my-reviews" element={<PersonalReviews />} />
+          <Route path="/delete-user" element={<DeleteUser />} />
+          <Route path="/edit-review/:id" element={<EditReview />} />
         </Routes>
       </div>
     </BrowserRouter>

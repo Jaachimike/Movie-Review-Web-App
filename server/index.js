@@ -19,7 +19,8 @@ app.post('/signup', (req, res) => {
             email: email,
             password: hash
         }).then(() => {
-            res.json('USER REGISTERED')
+            // res.json(username)
+            res.json('User Registered')
         }).catch((err) => {
             if (err) {
                 res.status(400).json({ error: err })
@@ -69,14 +70,79 @@ app.get('/movie-reviews', async (req, res) => {
 })
 
 app.get('/personal-reviews', async (req, res) => {
-    const { username } = req.body
+    const { username } = req.query
     try {
-        const personal_review = Review.findAll({ where: { name: username } })
+        const personal_review = await Review.findAll({ where: { name: username } })
         res.json(personal_review)
     } catch (err) {
         console.error(err);
         res.status(400).json({ error: 'Internal server error' })
 
+    }
+})
+
+app.delete('/delete-review/:id', async (req, res) => {
+    const id = req.params.id
+    try {
+        const deletedReview = await Review.destroy({ where: { id: id } })
+        if (deletedReview) {
+            res.json({ message: 'Review deleted successfully' });
+        } else {
+            res.status(404).json({ error: 'Review not found' });
+        }
+
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({ error: 'Internal server error' })
+    }
+})
+
+
+app.delete('/delete-user', async (req, res) => {
+    const { email } = req.query
+    try {
+        const deletedUser = await User.destroy({ where: { email: email } })
+        if (deletedUser) {
+            res.send('User deleted')
+        } else {
+            res.send('User not deleted yet')
+        }
+    } catch (err) {
+        console.error(err);
+    }
+})
+
+app.get('/get-review/:id', async (req, res) => {
+    const id = req.params.id
+    console.log(id);
+    try {
+        const review = await Review.findOne({ where: { id: id } })
+        res.json(review)
+    } catch (err) {
+        console.error(err);
+    }
+})
+
+app.put('/update-review/:id', async (req, res) => {
+    const reviewId = req.params.id
+    const { title, review } = req.body
+    console.log(reviewId);
+
+    try {
+        const existingReview = await Review.findByPk(reviewId)
+        if (!existingReview) {
+            return res.status(404).json({ error: 'Review not found' });
+        }
+        await existingReview.update({ title: title, review: review })
+
+        // existingReview.title = title
+        // existingReview.review = review
+
+        // await existingReview.save()
+
+        return res.status(200).json({ message: 'Review updated successfully' });
+    } catch (err) {
+        console.error(err);
     }
 })
 

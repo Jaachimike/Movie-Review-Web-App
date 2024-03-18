@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Logo from "../assets/logos/Logo.svg";
 import Axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { displayUser, setDisplayUser } = useContext(UserContext);
+  const { setDisplayUser } = useContext(UserContext);
 
   const login = (e) => {
     e.preventDefault();
@@ -20,6 +20,8 @@ const Login = () => {
       .then((res) => {
         // const user = res.data.stringify();
         setDisplayUser(res.data);
+        // console.log(res.data);
+        // console.log(displayUser);
         navigate("/");
         setEmail("");
         setPassword("");
@@ -28,6 +30,10 @@ const Login = () => {
         console.log(err);
       });
   };
+
+  // useEffect(() => {
+  //   console.log(displayUser);
+  // }, [displayUser]);
 
   return (
     <div>
