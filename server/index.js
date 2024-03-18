@@ -3,6 +3,7 @@ const app = express()
 const cors = require('cors')
 const db = require('./models')
 const { User, Review } = require('./models')
+const PORT = process.env.PORT || 2002
 
 const bcrypt = require('bcrypt')
 const cookieParser = require('cookie-parser')
@@ -148,7 +149,7 @@ app.put('/update-review/:id', async (req, res) => {
 
 
 db.sequelize.sync().then((req) => {
-    app.listen(2002, () => {
+    app.listen(PORT, () => {
         console.log('I am running on port 2002');
     })
 })
