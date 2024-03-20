@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const EditReview = () => {
   const { id } = useParams();
   const [review, setReview] = useState(null);
   const [newTitle, setNewTitle] = useState("");
   const [newReview, setNewReview] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchReview = async () => {
@@ -30,6 +32,7 @@ const EditReview = () => {
     })
       .then((res) => {
         console.log(res);
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
